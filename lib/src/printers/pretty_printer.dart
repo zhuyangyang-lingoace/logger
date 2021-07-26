@@ -142,6 +142,7 @@ class PrettyPrinter extends LogPrinter {
     return _formatAndPrint(
       event.level,
       messageStr,
+      event.tag,
       timeStr,
       errorStr,
       stackTraceStr,
@@ -267,6 +268,7 @@ class PrettyPrinter extends LogPrinter {
   List<String> _formatAndPrint(
     Level level,
     String message,
+    String? tag,
     String? time,
     String? error,
     String? stacktrace,
@@ -300,6 +302,11 @@ class PrettyPrinter extends LogPrinter {
 
     if (time != null) {
       buffer.add(color('$verticalLineAtLevel$time'));
+      if (includeBox[level]!) buffer.add(color(_middleBorder));
+    }
+
+    if(tag != null){
+      buffer.add(color('$verticalLineAtLevel$tag'));
       if (includeBox[level]!) buffer.add(color(_middleBorder));
     }
 
